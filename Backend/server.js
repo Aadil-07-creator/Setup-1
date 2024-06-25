@@ -1,11 +1,19 @@
-const serve= require('express')
-const app= serve();
+const express= require('express');
+const app= express();
+const cors= require('cors');
 
-//app.use(express.json())-- it is giving error
+//write npm run server to esecute the file and start the server
+app.use(express.json()) 
+
+app.use(cors({
+    origin: 'http://localhost:5000',
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+    credentials: true
+}));
 
 app.get('/',(req,res)=>
 {
-    res.send('Hi')
+    res.send('server is running...')
 })
 const arr= [
     {
@@ -39,4 +47,4 @@ app.post('/addproducts',(req,res) =>
     console.log(id,name);
     return res.send('data stored')
 })
-app.listen(3000,()=> console.log('server is runnimg ...'))
+app.listen(5000,()=> console.log('server is runnimg ...'))
